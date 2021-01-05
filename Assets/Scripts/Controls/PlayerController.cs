@@ -9,17 +9,21 @@ using UnityEngine;
  * directly controlled by player input.  
  */
 [RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(MeleeAttack))]
 public class PlayerController : MonoBehaviour
 {
     public float PlayerSpeed;
 
     private CharacterController _controller;
+    private MeleeAttack _meleeAttack;
     private Vector2 _currentVelocity;
+
     void Start()
     {
         //set player as current active
         EventHandler<SetActiveControllerEvent>.GetInstance().Invoke(new SetActiveControllerEvent(this));
         _controller = GetComponent<CharacterController>();
+        _meleeAttack = GetComponent<MeleeAttack>();
     }
 
     /*
@@ -28,6 +32,14 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         _controller.Move(_currentVelocity * PlayerSpeed * Time.deltaTime);
+    }
+
+    public Vector2 GetForwardFacing() {
+        return Vector2.right * transform.localScale.x;
+    }
+
+    public void RequestMeleeAttack() {
+        _meleeAttack.Attack(GetForwardFacing());
     }
     
     /*
