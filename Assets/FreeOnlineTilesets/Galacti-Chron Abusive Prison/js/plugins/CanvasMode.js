@@ -1,1 +1,0 @@
-SceneManager.preferableRendererType = function() { return 'canvas'; };
