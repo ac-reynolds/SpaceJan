@@ -13,10 +13,10 @@ public class InputHandler : MonoBehaviour
     //for handling inputs other than default movement
     public enum InputAction
     {
-        Interact
+        Attack
     }
     private static Dictionary<InputAction, KeyCode> keyBinds = new Dictionary<InputAction, KeyCode> {
-        { InputAction.Interact,   KeyCode.E }
+        { InputAction.Attack,   KeyCode.Mouse0 }
     };
 
     //controller currently being manipulated by player movement commands
@@ -40,7 +40,10 @@ public class InputHandler : MonoBehaviour
         if (_activeController == null) {
             Debug.Log("Input handler has no active controller.  Invoke SetActiveControllerEvent to set the active controller.");
         } else {
-            _activeController.RequestMovement(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+            _activeController.RequestMovement(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            if (Input.GetKeyDown(keyBinds[InputAction.Attack])) {
+                _activeController.RequestMeleeAttack();
+            }
         }
     }
 
