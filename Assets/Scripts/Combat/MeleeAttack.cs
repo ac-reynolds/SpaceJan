@@ -6,9 +6,9 @@ using UnityEngine;
  * Component to add to objects that can melee attack.  When attack is called, shoots out a
  * raycast in many different directions, tracking each object hit.  Then calls appropriate damage taken on the target.  
  */
-public class MeleeAttack : MonoBehaviour
+public class MeleeAttack : MonoBehaviour, IAttack
 {
-    public float AttackRange = 2;
+    public float AttackRange { get; set; } = 2;
     public GameObject DebugPrefab;
 
     private List<Quaternion> _rayCastRotation;
@@ -37,7 +37,7 @@ public class MeleeAttack : MonoBehaviour
         }
 
         foreach (GameObject target in targetsHit) {
-            Health targetHealth = target.GetComponent<Health>();
+            Health targetHealth = target.transform.parent.GetComponent<Health>();
             if (targetHealth != null) {
                 targetHealth.Take1Damage();
             }
