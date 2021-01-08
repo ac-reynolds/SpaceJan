@@ -46,13 +46,13 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 1.6
+  m_Height: 1.4
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: -0.13, z: 0}
+  m_Center: {x: 0, y: -0.17, z: 0}
 --- !u!114 &3343566230836587414
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78,7 +78,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6561cfa58c0ea0449933e2f187adac9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackRange: 2
   DebugPrefab: {fileID: 4120715968571998682, guid: 746898ae93fe0984db738b51f8e7b489, type: 3}
 --- !u!114 &4455068565152471664
 MonoBehaviour:
