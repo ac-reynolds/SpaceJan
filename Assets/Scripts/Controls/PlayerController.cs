@@ -13,7 +13,12 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public float PlayerSpeed;
-
+	
+	enum animation {
+			
+	}
+	
+	private Animator _animator;
     private CharacterController _controller;
     private MeleeAttack _meleeAttack;
     private Vector2 _currentVelocity;
@@ -24,6 +29,7 @@ public class PlayerController : MonoBehaviour
         EventHandler<SetActiveControllerEvent>.GetInstance().Invoke(new SetActiveControllerEvent(this));
         _controller = GetComponent<CharacterController>();
         _meleeAttack = GetComponent<MeleeAttack>();
+        _animator = GetComponent<Animator>();
     }
 
     /*
@@ -49,13 +55,13 @@ public class PlayerController : MonoBehaviour
     public void RequestMovement(float horizontalMovement, float verticalMovement) {
         _currentVelocity.Set(horizontalMovement, verticalMovement);
         if (_currentVelocity.x > 0) {
-            Vector2 scale = transform.localScale;
-            scale.x = 1;
-            transform.localScale = scale;
+            _animator.SetInteger("direction", 2);
         } else if (_currentVelocity.x < 0) {
-            Vector2 scale = transform.localScale;
-            scale.x = -1;
-            transform.localScale = scale;
+            _animator.SetInteger("direction", 3);
+        } else if (_currentVelocity.y > 0) {
+            _animator.SetInteger("direction", 1);
+        } else if (_currentVelocity.y < 0) {
+            _animator.SetInteger("direction", 0);
         }
     }
 }
